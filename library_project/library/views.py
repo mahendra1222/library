@@ -13,7 +13,7 @@ from .serializers import BookSerializer, ExtendedLoanSerializer, StudentSerializ
 from rest_framework import permissions
 from .permissions import IsLibrarian, IsStudent
 
-           
+
 # class BookViewSet(viewsets.ReadOnlyModelViewSet):
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
