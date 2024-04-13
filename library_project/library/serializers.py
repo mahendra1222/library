@@ -5,7 +5,7 @@ from .models import Book, Student, Loan, UserProfile
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = ['role']
+        fields = ['user', 'role']
 
 
 class BookSerializer(serializers.ModelSerializer):

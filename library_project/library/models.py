@@ -1,16 +1,21 @@
 from django.db import models
-
-# Create your models here.
-
-
-from django.db import models
 from django.utils import timezone
 from datetime import timedelta
 from django.contrib.auth.models import User
+class Book(models.Model):
+    title = models.CharField(max_length=200)
+    copies = models.IntegerField(default=1)
 
+    def __str__(self):
+        return self.title
+class Student(models.Model):
+    name = models.CharField(max_length=100)
+    borrowed_books = models.ManyToManyField(Book, through='Loan')
 
+    def __str__(self):
+        return self.name
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    user = models.OneToOneField(Student, on_delete=models.CASCADE, related_name='profile')
     ROLE_CHOICES = (
         ('student', 'Student'),
         ('librarian', 'Librarian'),
@@ -22,20 +27,10 @@ class UserProfile(models.Model):
         return self.user.username
 
 
-class Book(models.Model):
-    title = models.CharField(max_length=200)
-    copies = models.IntegerField(default=1)
-
-    def __str__(self):
-        return self.title
 
 
-class Student(models.Model):
-    name = models.CharField(max_length=100)
-    borrowed_books = models.ManyToManyField(Book, through='Loan')
 
-    def __str__(self):
-        return self.name
+
 
 
 class Loan(models.Model):

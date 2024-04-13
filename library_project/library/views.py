@@ -1,16 +1,10 @@
 from datetime import timezone, timedelta
-
 from django.shortcuts import render, get_object_or_404
-
-# Create your views here.
 from rest_framework import viewsets, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-
-
-from .models import Book, Student, Loan
-from .serializers import BookSerializer, ExtendedLoanSerializer, StudentSerializer
-
+from .models import Book, Student, Loan, UserProfile
+from .serializers import BookSerializer, ExtendedLoanSerializer, StudentSerializer, UserProfileSerializer
 from rest_framework import permissions
 from .permissions import IsLibrarian, IsStudent
 
@@ -83,6 +77,6 @@ class ManageLoansViewSet(viewsets.ModelViewSet):
 
 
 
-# class LoanViewSet(viewsets.ModelViewSet):
-#     queryset = Loan.objects.all()
-#     serializer_class = LoanSerializer
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer

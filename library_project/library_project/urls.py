@@ -17,9 +17,12 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
+from library import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('library.urls')),
+    path('student_loans/', views.borrowed_books,name='available-books'),
+    path('take_book', views.borrow_book,    name='take-book'),
 ]
 
